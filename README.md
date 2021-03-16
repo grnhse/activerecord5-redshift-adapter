@@ -1,10 +1,24 @@
 activerecord6-redshift-adapter
 ==============================
 
-Amazon Redshift adapter for ActiveRecord 6 (Rails 6).
-I forked the project from https://github.com/ConsultingMD/activerecord5-redshift-adapter
+Amazon Redshift adapter for ActiveRecord 6 (Rails 6.1).
 
-Thanks for the auhors.
+I forked the project from https://github.com/kwent/activerecord6-redshift-adapter
+This gem is compatible with Rails 6.1.3
+
+### Issue resolved
+On upstream repository while tried:
+
+`require 'active_record/connection_adapters/redshift_adapter'`
+This error were raised.
+```shell
+NameError (uninitialized constant ActiveRecord::ConnectionAdapters::AbstractAdapter::SchemaCreation)
+Did you mean?  ActiveRecord::ConnectionAdapters::SchemaCreation
+               ActiveRecord::SchemaMigration
+```
+In this gem I've resolved this issue
+
+All thanks goes to upstream authors!
 
 Usage
 -------------------
