@@ -1,8 +1,14 @@
 activerecord5-redshift-adapter
 ==============================
 
-Amazon Redshift adapter for ActiveRecord 5 (Rails 5).
-I cloned the project from aamine/activerecord4-redshift-adapter.
+The clone path for this Repo is 
+ - aamine/activerecord4-redshift-adapter
+ - ConsultingMD/activerecord5-redshift-adapter
+ - rapito/activerecord5-redshift-adapter
+
+This provides a stable tag including changes that fixes Rails 5.2 migration issues.
+
+Original README.md continues from here.
 
 The Redshift driver for ActiveRecord4 already exists at:
 https://github.com/aamine/activerecord4-redshift-adapter, and the one for
