@@ -8,7 +8,9 @@ The clone path for this Repo is
 
 This provides a stable tag including changes that fixes Rails 5.2 migration issues.
 
-Original README.md continues from here.
+**NOTE**: Neither Greenhouse Software nor its employees provide support for this Gem. It's provided As-Is.
+
+*Original README.md continues from here.*
 
 The Redshift driver for ActiveRecord4 already exists at:
 https://github.com/aamine/activerecord4-redshift-adapter, and the one for
