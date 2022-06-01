@@ -1,29 +1,8 @@
+# frozen_string_literal: true
+
 module ActiveRecord
   module ConnectionAdapters
     module Redshift
-      class SchemaCreation < AbstractAdapter::SchemaCreation
-        private
-
-        def visit_ColumnDefinition(o)
-          o.sql_type = type_to_sql(o.type, o.options)
-          super
-        end
-
-        def add_column_options!(sql, options)
-          column = options.fetch(:column) { return super }
-
-          if options[:identity] && options[:identity].first && options[:identity].last
-            sql << " IDENTITY(#{options[:identity].first}, #{options[:identity].last})"
-          end
-
-          if column.type == :uuid && options[:default] =~ /\(\)/
-            sql << " DEFAULT #{options[:default]}"
-          else
-            super
-          end
-        end
-      end
-
       module SchemaStatements
         # Drops the database specified on the +name+ attribute
         # and creates it again using the provided +options+.
@@ -164,8 +143,8 @@ module ActiveRecord
           end
         end
 
-        def new_column(name, default, sql_type_metadata = nil, null = true, table_name = nil, default_function = nil, identity = nil) # :nodoc:
-          RedshiftColumn.new(name, default, sql_type_metadata, null, table_name, default_function, identity)
+        def new_column(name, default, sql_type_metadata = nil, null = true, table_name = nil, default_function = nil) # :nodoc:
+          RedshiftColumn.new(name, default, sql_type_metadata, null, default_function)
         end
 
 				def table_options(table_name) # :nodoc:

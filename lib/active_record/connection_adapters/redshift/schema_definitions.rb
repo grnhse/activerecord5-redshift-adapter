@@ -55,7 +55,7 @@ module ActiveRecord
         private
 
         def create_column_definition(*args)
-          Redshift::ColumnDefinition.new *args
+          Redshift::ColumnDefinition.new(*args)
         end
       end
 
