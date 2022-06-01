@@ -10,6 +10,8 @@ This provides a stable tag including changes that fixes Rails 5.2 migration issu
 
 **NOTE**: Neither Greenhouse Software nor its employees provide support for this Gem. It's provided As-Is to add a stable branch that fixes issue introduced in Rails 5.2. Greenhouse will not respond issues, and requests for features or PRs should be submitted to the source gem at https://github.com/ConsultingMD/activerecord5-redshift-adapter
 
+**NOTE 2**: Use v1 for Rails 5. Use v2 for Rails 6.
+
 -------------------------
 
 *Original README.md continues from here.*
