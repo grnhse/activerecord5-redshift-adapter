@@ -3,6 +3,45 @@
 module ActiveRecord
   module ConnectionAdapters
     module Redshift
+
+      if ActiveRecord::VERSION::MAJOR >= 6 && ActiveRecord::VERSION::MINOR >= 1
+        class SchemaCreation < SchemaCreation
+          private
+
+          def visit_ColumnDefinition(o)
+            o.sql_type = type_to_sql(o.type, limit: o.limit, precision: o.precision, scale: o.scale)
+            super
+          end
+
+          def add_column_options!(sql, options)
+            column = options.fetch(:column) { return super }
+            if column.type == :uuid && options[:default] =~ /\(\)/
+              sql << " DEFAULT #{options[:default]}"
+            else
+              super
+            end
+          end
+        end
+      else
+        class SchemaCreation < AbstractAdapter::SchemaCreation
+          private
+
+          def visit_ColumnDefinition(o)
+            o.sql_type = type_to_sql(o.type, limit: o.limit, precision: o.precision, scale: o.scale)
+            super
+          end
+
+          def add_column_options!(sql, options)
+            column = options.fetch(:column) { return super }
+            if column.type == :uuid && options[:default] =~ /\(\)/
+              sql << " DEFAULT #{options[:default]}"
+            else
+              super
+            end
+          end
+        end
+      end
+
       module SchemaStatements
         # Drops the database specified on the +name+ attribute
         # and creates it again using the provided +options+.
@@ -115,7 +154,7 @@ module ActiveRecord
         end
 
         def drop_table(table_name, options = {})
-          execute "DROP TABLE #{' IF EXISTS' if options[:if_exists]} #{quote_table_name(table_name)}#{' CASCADE' if options[:force] == :cascade}"
+          execute "DROP TABLE IF EXISTS #{quote_table_name(table_name)}#{' CASCADE' if options[:force] == :cascade}"
         end
 
         # Returns true if schema exists.
@@ -138,8 +177,7 @@ module ActiveRecord
             default_value = extract_value_from_default(default)
             type_metadata = fetch_type_metadata(column_name, type, oid, fmod)
             default_function = extract_default_function(default_value, default)
-						identity = extract_identity_from_default default
-						new_column(column_name, default_value, type_metadata, notnull == 'f', table_name, default_function, identity)
+						new_column(column_name, default_value, type_metadata, notnull == 'f', table_name, default_function)
           end
         end
 
