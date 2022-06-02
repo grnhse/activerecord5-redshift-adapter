@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.description = 'Amazon Redshift adapter for ActiveRecord 6.x.'
   s.license = 'MIT'
 
-  s.author = ['Nancy Foen', 'Minero Aoki', 'iamdbc', 'Quentin Rousseau']
-  s.email = 'fantast.d@gmail.com'
+  s.author = ['Nancy Foen', 'Minero Aoki', 'iamdbc', 'Quentin Rousseau', 'Tom Phillips']
+  s.email = 'n/a'
   s.homepage = 'https://github.com/grnhse/activerecord5-redshift-adapter'
 
   s.files = Dir.glob(['LICENSE', 'README.md', 'lib/**/*.rb'])
