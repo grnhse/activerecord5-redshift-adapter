@@ -82,7 +82,7 @@ module ActiveRecord
         string:      { name: "varchar" },
         text:        { name: "varchar" },
         integer:     { name: "integer" },
-        float:       { name: "decimal" },
+        float:       { name: "float" },
         decimal:     { name: "decimal" },
         datetime:    { name: "timestamp" },
         time:        { name: "timestamp" },
